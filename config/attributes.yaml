@@ -1,0 +1,3 @@
+controllers:
+resource: ../../src/FOLDER_NAME_OF_WHERE_YOUR_ROUTER_CLASSES_EXISTS/
+type: annotation
