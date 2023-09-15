@@ -13,7 +13,7 @@ RUN apt-get update && \
     wget \
     git \
     unzip \
-    -y --no-install-recommends
+    -y  nodejs npm
 
 # Install PHP Extensions
 RUN docker-php-ext-install zip pdo_mysql
@@ -28,6 +28,8 @@ RUN usermod -u 1000 www-data
 RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone \
     && printf '[PHP]\ndate.timezone = "%s"\n', ${TIMEZONE} > /usr/local/etc/php/conf.d/tzone.ini \
     && "date"
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Start Apache in foreground
 CMD ["apache2-foreground"]
